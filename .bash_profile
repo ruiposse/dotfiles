@@ -1,3 +1,4 @@
+export PATH=/usr/local/bin:$PATH
 
 # -----------------------------------------------
 # Load scripts
@@ -16,13 +17,18 @@ if [ -f ~/.git-completion.bash ]; then
   source ~/.git-completion.bash
 fi
 
+
 # -----------------------------------------------
 # Alias
 # -----------------------------------------------
 
 alias ll='ls -Gla'
+alias llg='ll | grep'
 alias cd..='cd ..'
 alias deldsstore="find . -type f -name '*.DS_Store' -ls -delete"
+alias ccat="pygmentize -O style=monokai -f console256 -g"
+alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+
 
 # -----------------------------------------------
 # PS1

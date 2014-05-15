@@ -6,6 +6,26 @@
 " General Setup
 " -----------------------------------------------------------------------------
 
+" Use Vim settings, rather then Vi settings
+set nocompatible
+
+" Command completion
+" http://items.sjbach.com/319/configuring-vim-right
+" https://github.com/skwp/dotfiles/blob/master/vimrc
+set wildmode=list:longest
+set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
+set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
+set wildignore+=*vim/backups*
+set wildignore+=*sass-cache*
+set wildignore+=*DS_Store*
+set wildignore+=vendor/rails/**
+set wildignore+=vendor/cache/**
+set wildignore+=*.gem
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=*.png,*.jpg,*.gif
+
+
 set ruler
 
 " Number lines (using relative line-numbering if it's available)
