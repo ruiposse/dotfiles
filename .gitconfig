@@ -1,0 +1,14 @@
+[user]
+	name = Rui Posse
+	email = ruiposse@gmail.com
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore_global
+[alias]
+	co = checkout
+	st = status
+	ll = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[color]
+	ui = true
+[merge]
+	tool = opendiff
