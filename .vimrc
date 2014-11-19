@@ -2,12 +2,42 @@
 " .vimrc resources
 " https://github.com/mtarbit/dotfiles/blob/master/source/.vimrc
 
+
+set nocompatible
+filetype off
+
+" ------------------------------------------------------------------------------
+" Vundle
+" -----------------------------------------------------------------------------
+" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Bundle "gmarik/vundle"
+
+" FileBrowser
+Bundle "scrooloose/nerdtree"
+
+" Fuzzy Search
+Bundle "kien/ctrlp.vim"
+
+" Zen
+Bundle "mattn/emmet-vim"
+
+Bundle "bling/vim-airline"
+let g:airline#extensions#tabline#enabled = 1
+
+call vundle#end()
+filetype plugin indent on
+
 " ------------------------------------------------------------------------------
 " General Setup
 " -----------------------------------------------------------------------------
 
-" Use Vim settings, rather then Vi settings
-set nocompatible
+" Center cursor vertically (http://vim.wikia.com/wiki/Keep_your_cursor_centered_vertically_on_the_screen)
+set so=999
 
 " Command completion
 " http://items.sjbach.com/319/configuring-vim-right
