@@ -42,4 +42,4 @@ GREEN="\[\033[0;32m\]"
 MAGENTA="\[\033[0;35m\]"
 NO_COLOUR="\[\033[0m\]"
 
-PS1="\u:\w$MAGENTA\$(__git_ps1)$NO_COLOUR\$ "
+PS1="\n\u:\w$MAGENTA\$(__git_ps1)$NO_COLOUR\n→ "
