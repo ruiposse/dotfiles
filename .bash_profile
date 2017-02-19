@@ -8,7 +8,7 @@ export PATH=/usr/local/bin:$PATH
 # https://github.com/git/git/tree/master/contrib/completion
 
 # git branch prompt script.
-if [ -f ~/.git-completion.bash ]; then
+if [ -f ~/.git-prompt.sh ]; then
   source ~/.git-prompt.sh
 fi
 
