@@ -1,47 +1,33 @@
 
 " .vimrc resources
 " https://github.com/mtarbit/dotfiles/blob/master/source/.vimrc
+" http://items.sjbach.com/319/configuring-vim-right
 
-
-set nocompatible
-filetype off
-
-" ------------------------------------------------------------------------------
-" Vundle
-" -----------------------------------------------------------------------------
-" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-filetype off
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Bundle "gmarik/vundle"
-
-" FileBrowser
-Bundle "scrooloose/nerdtree"
-
-" Fuzzy Search
-Bundle "kien/ctrlp.vim"
-
-" Zen
-Bundle "mattn/emmet-vim"
-
-Bundle "bling/vim-airline"
-let g:airline#extensions#tabline#enabled = 1
-
-call vundle#end()
-filetype plugin indent on
 
 " ------------------------------------------------------------------------------
 " General Setup
 " -----------------------------------------------------------------------------
 
-" Center cursor vertically (http://vim.wikia.com/wiki/Keep_your_cursor_centered_vertically_on_the_screen)
-set so=999
+" Don't hobble vim in favour of vi-compatibility.
+set nocompatible
+
+" Display the status line always
+set laststatus=2
+
+" Don't wrap lines.
+set nowrap
+
+" File-type highlighting and configuration.
+syntax on
+filetype on
+
+" Enable mouse support
+set mouse=a
+
+" Don't beep or flash as an alert.
+set visualbell t_vb=
 
 " Command completion
-" http://items.sjbach.com/319/configuring-vim-right
-" https://github.com/skwp/dotfiles/blob/master/vimrc
 set wildmode=list:longest
 set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
 set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
@@ -55,6 +41,39 @@ set wildignore+=log/**
 set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
 
+" ------------------------------------------------------------------------------
+" Indentation
+" ------------------------------------------------------------------------------
+
+set autoindent
+set smartindent
+set smarttab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set expandtab
+
+" Auto indent pasted text
+nnoremap p p=`]<C-o>
+nnoremap P P=`]<C-o>
+
+filetype plugin on
+filetype indent on
+
+" Display tabs and trailing spaces visually
+set list listchars=tab:\ \ ,trail:·
+
+
+" ------------------------------------------------------------------------------
+" Scrolling
+" ------------------------------------------------------------------------------
+
+" set scrolloff=8         "Start scrolling when we're 8 lines away from margins
+" set sidescrolloff=15
+" set sidescroll=1
+
+" Center cursor vertically (http://vim.wikia.com/wiki/Keep_your_cursor_centered_vertically_on_the_screen)
+set so=999
 
 set ruler
 
@@ -67,15 +86,44 @@ set ruler
 
 
 " ------------------------------------------------------------------------------
-" Colouring
+" Search
 " ------------------------------------------------------------------------------
 
-" Turn on syntax-highlighing.
-syntax on
+set hlsearch        " Highlight search terms
+" set incsearch       " ...dynamically as they are typed.
+set ignorecase      " Ignore case when searching...
+set smartcase       " ...unless we type a capital.
 
-" Worthwhile schemes: elflord, molokai, mustang, matts-mustang, matts-light
-" colorscheme matts-light
 
-" Use fancy colours.
-set t_Co=256
+" ------------------------------------------------------------------------------
+" Plugins
+" ------------------------------------------------------------------------------
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'altercation/vim-colors-solarized'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'kien/ctrlp.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'moll/vim-node'
+
+call plug#end()
+
+" nerdtree
+let NERDTreeShowHidden=1
+map <C-n> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" vim-airline
+let g:airline_theme='solarized'
+let g:airline#extensions#tabline#enabled = 1
+
+" vim-colors-solarized
+colorscheme solarized
+set background=dark
+let g:solarized_termcolors=256
 

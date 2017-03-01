@@ -2,8 +2,10 @@ Dotfiles
 ========
 
 
-##### Useful links
 
-Git Completion and Git Prompt - [https://github.com/git/git/tree/master/contrib/completion](https://github.com/git/git/tree/master/contrib/completion)
+##### Install
 
-iTerm2 Solarized - [https://github.com/altercation/solarized/tree/master/iterm2-colors-solarized](https://github.com/altercation/solarized/tree/master/iterm2-colors-solarized)
+```
+curl --silent https://raw.githubusercontent.com/ruiposse/dotfiles/master/install.sh | sh
+```
+
