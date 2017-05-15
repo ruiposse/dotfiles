@@ -61,6 +61,10 @@ echo $YELLOW"Install Hyper"$NO_COLOUR
 brew cask install hyper
 echo $YELLOW"Hyper done"$NO_COLOUR
 
+echo $YELLOW"Install ag"$NO_COLOUR
+brew install the_silver_searcher
+echo $YELLOW"ag done"$NO_COLOUR
+
 #
 # dotfiles
 #
