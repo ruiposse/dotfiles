@@ -7,9 +7,14 @@
 " ------------------------------------------------------------------------------
 " General Setup
 " -----------------------------------------------------------------------------
+let mapleader = ','
 
 " Don't hobble vim in favour of vi-compatibility.
 set nocompatible
+
+" Set font
+set gfn=menlo:h15
+set linespace=3
 
 " Display the status line always
 set laststatus=2
@@ -19,7 +24,8 @@ set nowrap
 
 " File-type highlighting and configuration.
 syntax on
-filetype on
+filetype plugin on
+filetype indent on
 
 " Enable mouse support
 set mouse=a
@@ -41,6 +47,30 @@ set wildignore+=log/**
 set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
 
+
+" ------------------------------------------------------------------------------
+" GUI
+" ------------------------------------------------------------------------------
+
+if has("gui_macvim")
+  " Press Ctrl-Tab to switch between open tabs (like browser tabs) to 
+  " the right side. Ctrl-Shift-Tab goes the other way.
+  noremap <C-Tab> :tabnext<CR>
+  noremap <C-S-Tab> :tabprev<CR>
+
+  " Switch to specific tab numbers with Command-number
+  noremap <D-1> :tabn 1<CR>
+  noremap <D-2> :tabn 2<CR>
+  noremap <D-3> :tabn 3<CR>
+  noremap <D-4> :tabn 4<CR>
+  noremap <D-5> :tabn 5<CR>
+  noremap <D-6> :tabn 6<CR>
+  noremap <D-7> :tabn 7<CR>
+  noremap <D-8> :tabn 8<CR>
+  " Command-0 goes to the last tab
+  noremap <D-9> :tablast<CR>
+endif
+
 " ------------------------------------------------------------------------------
 " Indentation
 " ------------------------------------------------------------------------------
@@ -59,6 +89,12 @@ nnoremap P P=`]<C-o>
 
 filetype plugin on
 filetype indent on
+
+" Folding
+set foldmethod=indent
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
 
 " Display tabs and trailing spaces visually
 set list listchars=tab:\ \ ,trail:·
@@ -101,15 +137,13 @@ set smartcase       " ...unless we type a capital.
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'kien/ctrlp.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-Plug 'moll/vim-node'
+Plug 'joshdick/onedark.vim'
+Plug 'dyng/ctrlsf.vim'
+Plug 'adinapoli/vim-markmultiple'
 
 call plug#end()
 
@@ -117,13 +151,27 @@ call plug#end()
 let NERDTreeShowHidden=1
 map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" let NERDTreeMapOpenInTab='<ENTER>'
+
+" ctrlp.vim
+let g:ctrlp_prompt_mappings = {
+      \ 'AcceptSelection("e")': ['<c-t>'],
+      \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+      \ }
+
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+" ctrlsf.vim
+nmap <D-F> :CtrlSF<space>
+nmap <C-F> :CtrlSF<space>
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*,*/node_modules/*,*/dist/*,*/build/*
 
 " vim-airline
-let g:airline_theme='solarized'
 let g:airline#extensions#tabline#enabled = 1
 
-" vim-colors-solarized
-colorscheme solarized
-set background=dark
-let g:solarized_termcolors=256
+" Theme
+colorscheme onedark
 
