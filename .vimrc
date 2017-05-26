@@ -1,51 +1,44 @@
-
 " .vimrc resources
 " https://github.com/mtarbit/dotfiles/blob/master/source/.vimrc
 " http://items.sjbach.com/319/configuring-vim-right
 
-
 " ------------------------------------------------------------------------------
 " General Setup
 " -----------------------------------------------------------------------------
+
 let mapleader = ','
 
-" Don't hobble vim in favour of vi-compatibility.
-set nocompatible
+set nocompatible " Don't hobble vim in favour of vi-compatibility.
+
+set nowrap            " Don't wrap lines.
+set mouse=a           " Enable mouse support
+set visualbell t_vb=  " Don't beep or flash as an alert.
+
+set list              " Show non-printable characters.
+let &listchars = 'tab:> ,extends:>,precedes:<,nbsp: ,trail:.'
 
 " Set font
-set gfn=menlo:h15
+" set gfn=menlo:h15
+" set linespace=3
 set linespace=3
+set encoding=utf8
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete:h13
+" set gfn=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete:h13
 
 " Display the status line always
 set laststatus=2
-
-" Don't wrap lines.
-set nowrap
 
 " File-type highlighting and configuration.
 syntax on
 filetype plugin on
 filetype indent on
 
-" Enable mouse support
-set mouse=a
-
-" Don't beep or flash as an alert.
-set visualbell t_vb=
-
 " Command completion
 set wildmode=list:longest
-set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
-set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
-set wildignore+=*vim/backups*
-set wildignore+=*sass-cache*
-set wildignore+=*DS_Store*
-set wildignore+=vendor/rails/**
-set wildignore+=vendor/cache/**
-set wildignore+=*.gem
-set wildignore+=log/**
-set wildignore+=tmp/**
-set wildignore+=*.png,*.jpg,*.gif
+set wildmenu "enable ctrl-n and ctrl-p to scroll thru matches
+
+" Ignore
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*,*/node_modules/*,*/dist/*,*/build/*,*DS_Store*
 
 
 " ------------------------------------------------------------------------------
@@ -71,6 +64,10 @@ if has("gui_macvim")
   noremap <D-9> :tablast<CR>
 endif
 
+" display gui tabs
+" set guioptions+=e
+
+
 " ------------------------------------------------------------------------------
 " Indentation
 " ------------------------------------------------------------------------------
@@ -80,15 +77,12 @@ set smartindent
 set smarttab
 set shiftwidth=2
 set softtabstop=2
-set tabstop=2
-set expandtab
+set tabstop=2       " Use spaces instead of tabs.
+set expandtab       " Use spaces instead of tabs.
 
 " Auto indent pasted text
 nnoremap p p=`]<C-o>
 nnoremap P P=`]<C-o>
-
-filetype plugin on
-filetype indent on
 
 " Folding
 set foldmethod=indent
@@ -97,7 +91,7 @@ set nofoldenable
 set foldlevel=2
 
 " Display tabs and trailing spaces visually
-set list listchars=tab:\ \ ,trail:·
+" set list listchars=tab:\ \ ,trail:·
 
 
 " ------------------------------------------------------------------------------
@@ -137,41 +131,80 @@ set smartcase       " ...unless we type a capital.
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/nerdtree'
-Plug 'kien/ctrlp.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'vim-airline/vim-airline'
+Plug 'mhinz/vim-startify'
 Plug 'joshdick/onedark.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dyng/ctrlsf.vim'
-Plug 'adinapoli/vim-markmultiple'
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'Raimondi/delimitMate'
+Plug 'mattn/emmet-vim'
+Plug 'digitaltoad/vim-pug'
 
 call plug#end()
 
 " nerdtree
 let NERDTreeShowHidden=1
-map <C-n> :NERDTreeToggle<CR>
+let NERDTreeMinimalUI=1
+let NERDTreeDirArrows=1
+let g:NERDTreeHijackNetrw=0
+" map <C-n> :NERDTreeToggle<CR>
+map <C-n> :NERDTreeTabsToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" let NERDTreeMapOpenInTab='<ENTER>'
+set guioptions-=L " remove nerdree scrollbar
+let g:nerdtree_tabs_open_on_gui_startup=0
+
+noremap <c-1> :tabn 1<CR>
+noremap <c-2> :tabn 2<CR>
+noremap <c-3> :tabn 3<CR>
+noremap <c-4> :tabn 4<CR>
+noremap <c-5> :tabn 5<CR>
+noremap <c-6> :tabn 6<CR>
+noremap <c-7> :tabn 7<CR>
+noremap <c-8> :tabn 8<CR>
+noremap <C-9> :tablast<CR>
+
+" devicons
+let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
+set ambiwidth=double
 
 " ctrlp.vim
-let g:ctrlp_prompt_mappings = {
-      \ 'AcceptSelection("e")': ['<c-t>'],
-      \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
-      \ }
-
+let g:ctrlp_map = '<C-p>'
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+" open ctrlp.vim in new tab
+let g:ctrlp_prompt_mappings = {
+  \ 'AcceptSelection("e")': [],
+  \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
+  \ }
 
 " ctrlsf.vim
 nmap <D-F> :CtrlSF<space>
 nmap <C-F> :CtrlSF<space>
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*,*/node_modules/*,*/dist/*,*/build/*
-
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
 
 " Theme
 colorscheme onedark
+
+" emmet
+" Using Tab key as abbreviation expander
+imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+
+" ------------------------------------------------------------------------------
+" Other
+" ------------------------------------------------------------------------------
+
+" Watch for .vimrc changes
+augroup myvimrchooks
+  au!
+  autocmd bufwritepost .vimrc source ~/.vimrc
+augroup END
 
