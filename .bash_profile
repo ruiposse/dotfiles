@@ -22,6 +22,7 @@ fi
 # Alias
 # -----------------------------------------------
 
+alias ls='ls -G'
 alias ll='ls -Gla'
 alias llg='ll | grep'
 alias cd..='cd ..'
