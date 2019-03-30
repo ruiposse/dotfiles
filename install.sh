@@ -46,14 +46,14 @@ fi
 
 # yarn
 # https://yarnpkg.com/
-if which yarn >/dev/null
-then
-  echo $YELLOW"yarn was already installed"$NO_COLOUR
-else
-  echo $YELLOW"Install yarn"$NO_COLOUR
-  brew install yarn
-  echo $YELLOW"n done"$NO_COLOUR
-fi
+#if which yarn >/dev/null
+#then
+#  echo $YELLOW"yarn was already installed"$NO_COLOUR
+#else
+#  echo $YELLOW"Install yarn"$NO_COLOUR
+#  brew install yarn
+#  echo $YELLOW"n done"$NO_COLOUR
+#fi
 
 # Hyper
 # https://github.com/zeit/hyper 
