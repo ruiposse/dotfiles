@@ -30,7 +30,7 @@ alias deldsstore="find . -type f -name '*.DS_Store' -ls -delete"
 alias ccat="pygmentize -O style=monokai -f console256 -g"
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias gpa="ls -d \"$PWD\"/* | xargs -I{} sh -c 'printf \"\x1b[32m{} \x1b[0m \n\"; git -C {} pull; printf \"\n\"'"
-
+alias gpall="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
 
 # -----------------------------------------------
 # PS1
