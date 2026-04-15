@@ -134,6 +134,7 @@ echo $YELLOW"Install vim configs"$NO_COLOR
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 link_file "$DOTFILES_DIR/.vimrc" "$HOME/.vimrc"
+vim +PlugInstall +qall
 echo $YELLOW"Done"$NO_COLOR
 
 # zshrc

@@ -192,7 +192,11 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
 " Theme
-colorscheme onedark
+if isdirectory(expand('~/.vim/plugged/onedark.vim'))
+  colorscheme onedark
+else
+  colorscheme default
+endif
 
 " emmet
 " Using Tab key as abbreviation expander
